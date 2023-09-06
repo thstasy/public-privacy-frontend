@@ -1,0 +1,61 @@
+/* Common Styles for Alert Popup and Content */
+.alert-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alert-content {
+  background-color: black;
+  padding: 20px;
+  text-align: left;
+  margin: 20px;
+  clear: both;
+  z-index: 1000;
+}
+
+.alert-message {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  text-align: right;
+  margin-right: 5px;
+  z-index: 1000;
+}
+
+/* Styles for "OK" and "Decision" Buttons */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align right */
+  padding: 10px;
+  z-index: 1000;
+  color: white;
+}
+
+.ok-button, .yes-button, .no-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto; /* Auto width */
+  padding: 10px 20px; /* Adjust padding */
+  font-size: 2em; /* Decrease font size */
+  cursor: pointer;
+  border: 5px solid white;
+  border-radius: 10px; /* Add border-radius */
+  background-color: black;
+  color: white;
+  margin: 0 10px;
+  z-index: 1000;
+}
+
+/* Other Styles */
+
+/* ... (rest of your CSS styles) ... */
