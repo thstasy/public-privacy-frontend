@@ -42,23 +42,18 @@ function GlobeVisualization() {
       });
       if (response.status === 201) {
         handleShowAlert("An email will be sent to your mailbox for confirmation.", "notification");
-        alert("An email will be sent to your mailbox for confirmation.");
       } else if (response.status === 409) {
         const responseData = await response.json();
         if (responseData.message === "Invalid Email" || responseData.message === "Email Already Subscribed") {
           handleShowAlert("Invalid Email: Please provide a valid email address.", "notification");
-          alert("Invalid Email: Please provide a valid email address.");
         } else {
           handleShowAlert("Subscription failed.", "notification");
-          alert("Subscription failed.");
         }
       } else if (response.status === 500) {
         handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
-        alert("Internal Server error. ");
       }
     } catch (error) {
       handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
-      alert("An error occurred.");
       console.error('Error:', error);
     }
   }
