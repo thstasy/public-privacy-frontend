@@ -35,6 +35,7 @@ function GlobeVisualization() {
       email: email,
     };
 
+
     try {
       const response = await httpClient.post('/subscribe', data, {
         headers,
@@ -43,23 +44,19 @@ function GlobeVisualization() {
 
       if (response.status === 201) {
         handleShowAlert("An email will be sent to your mailbox for confirmation.", "notification");
-      }
-
-      if (response.status === 409) {
-        if (response.message === "Invalid Email" || response.message === "Email Already Subscribed") {
-          handleShowAlert("Invalid Email: Please provide a valid email address.", "notification");
-        } else {
-          handleShowAlert("Subscription failed.", "notification");
-        };
-      }
-
-      if (response.status === 500) {
+      } else if (response.status === 409) {
+        handleShowAlert("Either an invalid Email was provided or the email is already in subscription", "notification");
+      } else if (response.status === 500) {
         handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
       }
-
     } catch (error) {
-      handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
-      console.error('Error:', error);
+      if (response.status === 409) {
+        handleShowAlert("Either an invalid Email was provided or the email is already in subscription", "notification");
+      }
+      if (response.status === 500) {
+        handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
+      }else{handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
+      console.error('Error:', error);}
     }
   }
 
