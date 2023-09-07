@@ -40,18 +40,27 @@ function GlobeVisualization() {
         headers,
         withCredentials: true,
       });
-      if (response.status === 201) {
-        handleShowAlert("An email will be sent to your mailbox for confirmation.", "notification");
-      } else if (response.status === 409) {
+
+
+      console.log('Response Status:', response.status);
+      if (response.status === 409) {
         const responseData = await response.json();
-        if (responseData.message === "Invalid Email" || responseData.message === "Email Already Subscribed") {
-          handleShowAlert("Invalid Email: Please provide a valid email address.", "notification");
-        } else {
-          handleShowAlert("Subscription failed.", "notification");
-        }
-      } else if (response.status === 500) {
-        handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
+        console.log('Response Message:', responseData.message);
+        // Add a temporary alert to verify that this block is executed
+        alert('Received a 409 response with message: ' + responseData.message);
       }
+      // if (response.status === 201) {
+      //   handleShowAlert("An email will be sent to your mailbox for confirmation.", "notification");
+      // } else if (response.status === 409) {
+      //   const responseData = await response.json();
+      //   if (responseData.message === "Invalid Email" || responseData.message === "Email Already Subscribed") {
+      //     handleShowAlert("Invalid Email: Please provide a valid email address.", "notification");
+      //   } else {
+      //     handleShowAlert("Subscription failed.", "notification");
+      //   }
+      // } else if (response.status === 500) {
+      //   handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
+      // }
     } catch (error) {
       handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
       console.error('Error:', error);
