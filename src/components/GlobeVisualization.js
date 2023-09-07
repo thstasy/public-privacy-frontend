@@ -41,7 +41,7 @@ function GlobeVisualization() {
         headers,
         withCredentials: true,
       });
-
+    
       if (response.status === 201) {
         handleShowAlert("An email will be sent to your mailbox for confirmation.", "notification");
       } else if (response.status === 409) {
@@ -50,14 +50,16 @@ function GlobeVisualization() {
         handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
       }
     } catch (error) {
-      if (response.status === 409) {
+      if (error.response && error.response.status === 409) {
         handleShowAlert("Either an invalid Email was provided or the email is already in subscription", "notification");
-      }
-      if (response.status === 500) {
+      } else if (error.response && error.response.status === 500) {
         handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
-      }else{handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
-      console.error('Error:', error);}
+      } else {
+        handleShowAlert("Apologies for internal server error, we'll fix it asap.", "notification");
+        console.error('Error:', error);
+      }
     }
+    
   }
 
   useEffect(() => {
